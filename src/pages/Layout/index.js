@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 /* Actions */
-import { loadDeltas } from '../../actions';
+import { loadDeltas } from '../../redux/actions';
 
 /* Hooks */
 import { useInterval } from '../../hooks/useInterval';
