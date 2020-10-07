@@ -24,7 +24,7 @@ const Layout = ({ value, loadDeltas }) => {
     fetch();
   }, [loadDeltas]);
 
-  useInterval(async () => await loadDeltas(), 3000);
+  useInterval(async () => await loadDeltas(), 60000);
 
   return (
     <Container>
