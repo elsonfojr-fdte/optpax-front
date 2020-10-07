@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux';
-import data from './pollingReducer';
+import statusDeltaList from './pollingReducer';
 
-export const Reducers = combineReducers({ data });
+export const Reducers = combineReducers({ statusDeltaList });
