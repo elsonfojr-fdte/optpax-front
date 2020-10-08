@@ -36,7 +36,7 @@ const Layout = ({ value, loadDeltas }) => {
 };
 
 const mapStateToProps = (store) => ({
-  value: store.statusDeltaList.value,
+  value: store.statusListSlice.value,
 });
 
 const mapDispatchToProps = (dispatch) =>
