@@ -1,12 +1,10 @@
-import { LOAD_DATA_SUCCESS } from './actionsTypes';
+import { loadStatus } from '../slices/statusListSlice';
 
 export const loadDeltas = () => (dispatch) => {
   return fetch('http://localhost:3001/deltas')
     .then((response) => response.json())
     .then(
-      (data) => {
-        dispatch({ type: LOAD_DATA_SUCCESS, data });
-      },
+      ({ deltas }) => dispatch(loadStatus({ deltas })),
       (err) => console.log('err', err)
     );
 };
