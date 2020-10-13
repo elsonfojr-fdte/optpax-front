@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 /* Actions */
-import { loadDeltas } from '../../redux/actions';
+import { loadDeltas, loadMissions } from '../../redux/actions';
 
 /* Hooks */
 import { useInterval } from '../../hooks/useInterval';
@@ -16,30 +16,35 @@ import MissionTable from '../../components/MissionTable';
 /* Styles */
 import { Container } from './styles';
 
-const Layout = ({ value, loadDeltas }) => {
+const Layout = ({ value, missionTable, loadDeltas, loadMissions }) => {
   useEffect(() => {
     async function fetch() {
       await loadDeltas();
+      await loadMissions();
     }
     fetch();
-  }, [loadDeltas]);
+  }, [loadDeltas, loadMissions]);
 
-  useInterval(async () => await loadDeltas(), 60000);
+  useInterval(async () => {
+    await loadDeltas();
+    await loadMissions();
+  }, 5000);
 
   return (
     <Container>
       <Header />
       <DeltaStatusList deltaList={value.deltas} />
-      <MissionTable />
+      <MissionTable missionTable={missionTable} />
     </Container>
   );
 };
 
 const mapStateToProps = (store) => ({
   value: store.statusListSlice.value,
+  missionTable: store.missionTableSlice,
 });
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ loadDeltas }, dispatch);
+  bindActionCreators({ loadDeltas, loadMissions }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout);
